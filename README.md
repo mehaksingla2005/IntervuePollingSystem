@@ -6,7 +6,7 @@
 
 ## 🔗 Live Project
 
-[https://live-polling-system-ifbp.vercel.app/](https://intervue-polling-system-kappa.vercel.app/)]
+[🔗[https://live-polling-system-ifbp.vercel.app/](https://intervue-polling-system-kappa.vercel.app/)]
 
 
 ---
