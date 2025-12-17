@@ -10,7 +10,7 @@ import { PollQuestion } from "@/components/poll/PollQuestion";
 import { PollResults } from "@/components/poll/PollResults";
 import { ChatPopup } from "@/components/poll/ChatPopup";
 import { usePoll } from "@/context/PollContext";
-import { ArrowLeft, User, Clock, AlertTriangle, Sparkles } from "lucide-react";
+import { ArrowLeft, User, Clock, AlertTriangle, Sparkles, Loader2 } from "lucide-react";
 
 export default function StudentInterface() {
   const { state, registerStudent, refreshState } = usePoll();
@@ -169,6 +169,33 @@ export default function StudentInterface() {
     );
   }
 
+  if (!hasActivePoll) {
+    return (
+      <div className="min-h-screen bg-white flex flex-col items-center justify-center p-4 relative">
+        <div className="flex flex-col items-center gap-8 animate-in fade-in zoom-in duration-500">
+          <Badge
+            variant="default"
+            className="bg-[#6B46C1] hover:bg-[#6B46C1] text-white px-4 py-1.5 rounded-full text-sm font-medium gap-2 shadow-sm"
+          >
+            <Sparkles className="h-3.5 w-3.5" />
+            Intervue Poll
+          </Badge>
+
+          <div className="relative">
+            <Loader2 className="h-12 w-12 text-[#6B46C1] animate-spin" />
+          </div>
+
+          <h2 className="text-2xl font-bold text-[#111827] text-center max-w-md">
+            Wait for the teacher to ask questions..
+          </h2>
+        </div>
+
+        {/* Chat Popup */}
+        <ChatPopup userType="student" userName={studentName} />
+      </div>
+    );
+  }
+
   return (
     <div className="min-h-screen bg-gray-50">
       <div className="border-b bg-white">
@@ -225,45 +252,18 @@ export default function StudentInterface() {
           </div>
         ) : (
           <div className="space-y-8">
-            {!hasActivePoll && (
-              <Card className="border-blue-200 bg-blue-50">
-                <CardContent className="text-center py-8">
-                  <h3 className="text-lg font-medium text-blue-900 mb-2">
-                    Waiting for Poll
-                  </h3>
-                  <p className="text-blue-700">
-                    No active poll at the moment. Please wait for your teacher
-                    to create a new poll.
-                  </p>
-                </CardContent>
-              </Card>
-            )}
-
             {state.results && (
               <div>
                 <div className="text-center mb-6">
                   <h2 className="text-2xl font-bold text-gray-900">
                     Poll Results
                   </h2>
-                  {hasActivePoll && (
-                    <p className="text-gray-600 mt-2">
-                      Thank you for your response! Here are the live results.
-                    </p>
-                  )}
+                  <p className="text-gray-600 mt-2">
+                    Thank you for your response! Here are the live results.
+                  </p>
                 </div>
                 <PollResults />
               </div>
-            )}
-
-            {!state.results && !hasActivePoll && (
-              <Card>
-                <CardContent className="text-center py-8">
-                  <p className="text-gray-600">
-                    No poll results to display yet. Results will appear after
-                    you submit an answer or when a poll ends.
-                  </p>
-                </CardContent>
-              </Card>
             )}
           </div>
         )}
