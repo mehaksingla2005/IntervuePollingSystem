@@ -73,15 +73,13 @@ npm run dev
 ## 🖼️ Screenshots
 
 <img width="1151" height="636" alt="Screenshot 2025-12-17 at 7 13 16 PM" src="https://github.com/user-attachments/assets/a39103d1-8e8c-452b-b592-d720b0f05eb3" />
-<img width="1151" height="636" alt="Screenshot 2025-12-17 at 7 16 30 PM" src="https://github.com/user-attachments/assets/26053292-36b6-498c-81ad-e780bbc8c194" />
+<img width="1151" height="636" alt="Screenshot 2025-12-17 at 7 50 55 PM" src="https://github.com/user-attachments/assets/e165b781-6797-4c7f-9f9d-533f6a7d028d" />
+<img width="1167" height="522" alt="Screenshot 2025-12-17 at 8 05 48 PM" src="https://github.com/user-attachments/assets/a419104a-a891-482c-8606-ab1c1c7ea2a0" />
+<img width="1205" height="786" alt="Screenshot 2025-12-17 at 8 05 14 PM" src="https://github.com/user-attachments/assets/aeffc231-e327-478b-bc68-983c8bb3d8f1" />
+<img width="1470" height="956" alt="Screenshot 2025-12-17 at 8 12 03 PM" src="https://github.com/user-attachments/assets/1dd806fa-2bcf-473d-8a37-9af67ba22821" />
 
-![Screenshot (74)](https://github.com/user-attachments/assets/0db79005-a34c-4807-9ee3-1af946135bb1)
 
-![Screenshot (75)](https://github.com/user-attachments/assets/9c0517b7-5304-4499-a729-78d433c192a1)!
-[Screenshot (76)](https://github.com/user-attachments/assets/39be0caa-c6ab-449d-a189-6e3e6613a435)
-![Screenshot (77)](https://github.com/user-attachments/assets/a0a7413f-9801-41bc-97a3-ded2d9c25544)
-![Screenshot (78)](https://github.com/user-attachments/assets/9c9ae895-8c6d-48fe-9f96-7fbf046d9f07)
-![Screenshot (79)](https://github.com/user-attachments/assets/98e34bb0-5ea2-4612-86ed-6ac886c56421)
+
 
 ![Screenshot (81)](https://github.com/user-attachments/assets/f6f4e450-7a6c-42ef-9e68-da7c2145d5d1)
 
