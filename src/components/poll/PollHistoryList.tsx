@@ -94,8 +94,7 @@ export function PollHistoryList() {
                                             // Looking at "Saturn 15%", bar covers "4 Satu".
                                             // Actually, let's just make the text standard black/gray. The Blue bar can be behind.
                                             />
-                       // Let's actually use the solid color but with `mix-blend-mode-multiply` maybe? No.
-                                            // I'll stick to a solid bar with opacity 0.8.
+                       
                                             <div
                                                 className="absolute top-0 left-0 h-full bg-[#5b5bd6] transition-all duration-1000 ease-out"
                                                 style={{ width: `${percentage}%` }}

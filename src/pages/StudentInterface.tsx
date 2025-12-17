@@ -1,21 +1,22 @@
-import { socket } from "@/lib/socket";
-
 import React, { useState, useEffect } from "react";
+import { socket } from "@/lib/socket";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { PollQuestion } from "@/components/poll/PollQuestion";
 import { PollResults } from "@/components/poll/PollResults";
-import { StudentNameModal } from "@/components/poll/StudentNameModal";
 import { ChatPopup } from "@/components/poll/ChatPopup";
 import { usePoll } from "@/context/PollContext";
-import { ArrowLeft, User, Clock, AlertTriangle } from "lucide-react";
+import { ArrowLeft, User, Clock, AlertTriangle, Sparkles } from "lucide-react";
 
 export default function StudentInterface() {
   const { state, registerStudent, refreshState } = usePoll();
   const [studentId, setStudentId] = useState<string>("");
   const [studentName, setStudentName] = useState<string>("");
+  const [nameInput, setNameInput] = useState("");
   const [showNameModal, setShowNameModal] = useState(false);
   const [showResults, setShowResults] = useState(false);
   const [isKicked, setIsKicked] = useState(false);
@@ -23,15 +24,13 @@ export default function StudentInterface() {
   const currentPoll = state.currentPoll;
   const hasActivePoll = currentPoll && currentPoll.isActive;
 
-
   useEffect(() => {
-  socket.emit("join", { role: "student" });
+    socket.emit("join", { role: "student" });
 
-  return () => {
-    socket.disconnect();
-  };
-}, []);
-
+    return () => {
+      socket.disconnect();
+    };
+  }, []);
 
   // Auto-refresh state every 2 seconds to sync with teacher actions
   useEffect(() => {
@@ -91,8 +90,58 @@ export default function StudentInterface() {
 
   if (showNameModal) {
     return (
-      <div className="min-h-screen bg-gray-50 flex items-center justify-center">
-        <StudentNameModal isOpen={true} onSubmit={handleNameSubmit} />
+      <div className="min-h-screen bg-white flex flex-col items-center justify-center p-4">
+        <div className="w-full max-w-2xl space-y-8 animate-in fade-in duration-500">
+          <div className="flex justify-center">
+            <div className="bg-primary text-primary-foreground px-4 py-1.5 rounded-full flex items-center gap-2 text-sm font-medium mb-8">
+              <Sparkles className="h-4 w-4" />
+              <span>Intervue Poll</span>
+            </div>
+          </div>
+
+          <div className="text-center space-y-4">
+            <h1 className="text-4xl font-bold tracking-tight text-gray-900">
+              Let's Get Started
+            </h1>
+            <p className="text-gray-500 max-w-xl mx-auto text-lg leading-relaxed">
+              If you're a student, you'll be able to{" "}
+              <strong className="text-gray-900">submit your answers</strong>,
+              participate in live polls, and see how your responses compare with
+              your classmates
+            </p>
+          </div>
+
+          <div className="max-w-md mx-auto w-full space-y-8 mt-12">
+            <div className="space-y-3">
+              <Label htmlFor="studentName" className="text-base font-bold">
+                Enter your Name
+              </Label>
+              <Input
+                id="studentName"
+                placeholder="e.g. Rahul Bajaj"
+                value={nameInput}
+                onChange={(e) => setNameInput(e.target.value)}
+                className="h-14 bg-gray-50 border-none text-lg px-4"
+                onKeyDown={(e) => {
+                  if (e.key === "Enter" && nameInput.trim()) {
+                    handleNameSubmit(nameInput.trim());
+                  }
+                }}
+              />
+            </div>
+            <Button
+              className="w-full text-lg h-14 text-lg font-medium rounded-full"
+              onClick={() => {
+                if (nameInput.trim()) {
+                  handleNameSubmit(nameInput.trim());
+                }
+              }}
+              disabled={!nameInput.trim()}
+            >
+              Continue
+            </Button>
+          </div>
+        </div>
       </div>
     );
   }
