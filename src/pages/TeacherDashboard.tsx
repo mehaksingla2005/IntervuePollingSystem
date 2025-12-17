@@ -1,3 +1,5 @@
+import { socket } from "@/lib/socket";
+
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
@@ -36,6 +38,15 @@ export default function TeacherDashboard() {
   const currentPoll = state.currentPoll;
   const hasActivePoll = currentPoll && currentPoll.isActive;
   const activeStudents = state.students.filter((s) => !s.isKicked);
+
+
+  useEffect(() => {
+  socket.emit("join", { role: "teacher" });
+
+  return () => {
+    socket.disconnect();
+  };
+}, []);
 
   // Auto-refresh state every 3 seconds to see new students and responses
   useEffect(() => {

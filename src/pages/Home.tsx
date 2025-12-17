@@ -1,94 +1,89 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Users, GraduationCap, BarChart3 } from "lucide-react";
+import { Sparkles } from "lucide-react";
+import { cn } from "@/lib/utils";
 
 export default function Home() {
+  const navigate = useNavigate();
+  const [selectedRole, setSelectedRole] = useState<"student" | "teacher" | null>(null);
+
+  const handleContinue = () => {
+    if (selectedRole) {
+      navigate(`/${selectedRole}`);
+    }
+  };
+
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 flex items-center justify-center p-4">
-      <div className="w-full max-w-4xl">
-        <div className="text-center mb-12">
-          <h1 className="text-5xl font-bold text-gray-900 mb-4">
-            Live Polling System
+    <div className="min-h-screen bg-background flex flex-col items-center justify-center p-4">
+      <div className="w-full max-w-4xl flex flex-col items-center">
+
+        {/* Badge */}
+        <div className="bg-primary text-primary-foreground px-4 py-1.5 rounded-full flex items-center gap-2 text-sm font-medium mb-8">
+          <Sparkles className="h-4 w-4" />
+          <span>Intervue Poll</span>
+        </div>
+
+        {/* Headings */}
+        <div className="text-center mb-12 max-w-2xl">
+          <h1 className="text-4xl md:text-5xl font-bold text-foreground mb-4">
+            Welcome to the <span className="font-extrabold">Live Polling System</span>
           </h1>
-          <p className="text-xl text-gray-600">
-            Create interactive polls and get real-time responses
+          <p className="text-lg">
+            Please select the role that best describes you to begin using the live polling system
           </p>
         </div>
 
-        <div className="grid md:grid-cols-2 gap-8 max-w-2xl mx-auto">
-          <Card className="hover:shadow-lg transition-shadow cursor-pointer group">
-            <Link to="/teacher">
-              <CardHeader className="text-center pb-4">
-                <div className="mx-auto w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mb-4 group-hover:bg-blue-200 transition-colors">
-                  <GraduationCap className="h-8 w-8 text-blue-600" />
-                </div>
-                <CardTitle className="text-2xl">Teacher</CardTitle>
-              </CardHeader>
-              <CardContent className="text-center">
-                <p className="text-gray-600 mb-6">
-                  Create polls, manage questions, and view live results from
-                  your students.
-                </p>
-                <Button className="w-full" size="lg">
-                  Enter as Teacher
-                </Button>
-                <div className="mt-4 text-sm text-gray-500">
-                  <div className="flex items-center justify-center gap-2 mb-1">
-                    <BarChart3 className="h-4 w-4" />
-                    Create and manage polls
-                  </div>
-                  <div className="flex items-center justify-center gap-2">
-                    <Users className="h-4 w-4" />
-                    View real-time responses
-                  </div>
-                </div>
-              </CardContent>
-            </Link>
+        {/* Cards Grid */}
+        <div className="grid md:grid-cols-2 gap-6 w-full max-w-3xl mb-12">
+          {/* Student Card */}
+          <Card
+            className={cn(
+              "cursor-pointer transition-all duration-200 border-2 hover:border-primary/50",
+              selectedRole === "student" ? "border-primary bg-primary/5 ring-1 ring-primary" : "border-border"
+            )}
+            onClick={() => setSelectedRole("student")}
+          >
+            <CardHeader className="pb-2">
+              <CardTitle className="text-2xl font-bold">I'm a Student</CardTitle>
+            </CardHeader>
+            <CardContent>
+              <p className="font-medium">
+                Join polls, submit your answers, and see how others responded real-time.
+              </p>
+            </CardContent>
           </Card>
 
-          <Card className="hover:shadow-lg transition-shadow cursor-pointer group">
-            <Link to="/student">
-              <CardHeader className="text-center pb-4">
-                <div className="mx-auto w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mb-4 group-hover:bg-green-200 transition-colors">
-                  <Users className="h-8 w-8 text-green-600" />
-                </div>
-                <CardTitle className="text-2xl">Student</CardTitle>
-              </CardHeader>
-              <CardContent className="text-center">
-                <p className="text-gray-600 mb-6">
-                  Join polls, submit your answers, and see how others responded
-                  real-time.
-                </p>
-                <Button className="w-full" size="lg">
-                  Join as Student
-                </Button>
-                <div className="mt-4 text-sm text-gray-500">
-                  <div className="flex items-center justify-center gap-2 mb-1">
-                    <BarChart3 className="h-4 w-4" />
-                    Answer poll questions
-                  </div>
-                  <div className="flex items-center justify-center gap-2">
-                    <Users className="h-4 w-4" />
-                    See live results
-                  </div>
-                </div>
-              </CardContent>
-            </Link>
+          {/* Teacher Card */}
+          <Card
+            className={cn(
+              "cursor-pointer transition-all duration-200 border-2 hover:border-primary/50",
+              selectedRole === "teacher" ? "border-primary bg-primary/5 ring-1 ring-primary" : "border-border"
+            )}
+            onClick={() => setSelectedRole("teacher")}
+          >
+            <CardHeader className="pb-2">
+              <CardTitle className="text-2xl font-bold">I'm a Teacher</CardTitle>
+            </CardHeader>
+            <CardContent>
+              <p className="font-medium">
+                Create polls, manage questions, and view live results from your students.
+              </p>
+            </CardContent>
           </Card>
         </div>
 
-        <div className="text-center mt-12">
-          <div className="bg-white rounded-lg p-6 shadow-sm max-w-md mx-auto">
-            <h3 className="font-semibold text-gray-900 mb-2">How it works</h3>
-            <p className="text-sm text-gray-600">
-              Teachers create polls with multiple choice questions. Students
-              have 60 seconds to respond. Everyone can see live results as they
-              come in.
-            </p>
-          </div>
-        </div>
+        {/* Continue Button */}
+        <Button
+          size="lg"
+          className="w-full max-w-xs text-lg h-12 rounded-full"
+          onClick={handleContinue}
+          disabled={!selectedRole}
+        >
+          Continue
+        </Button>
+
       </div>
     </div>
   );

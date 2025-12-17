@@ -1,4 +1,5 @@
 import type { Config } from "tailwindcss";
+import plugin from "tailwindcss/plugin";
 
 export default {
   darkMode: ["class"],
@@ -103,5 +104,70 @@ export default {
       },
     },
   },
-  plugins: [require("tailwindcss-animate")],
+  plugins: [
+    require("tailwindcss-animate"),
+    plugin(function ({ addBase }) {
+      addBase({
+        ":root": {
+          "--background": "0 0% 95%", // #F2F2F2
+          "--foreground": "0 0% 22%", // #373737
+          "--card": "0 0% 95%", // #F2F2F2
+          "--card-foreground": "0 0% 22%", // #373737
+          "--popover": "0 0% 95%", // #F2F2F2
+          "--popover-foreground": "0 0% 22%", // #373737
+          "--primary": "260 88% 43%", // #4F0DCE
+          "--primary-foreground": "0 0% 100%", // White for contrast
+          "--secondary": "232 56% 58%", // #5767D0
+          "--secondary-foreground": "0 0% 100%", // White for contrast
+          "--muted": "0 0% 43%", // #6E6E6E
+          "--muted-foreground": "0 0% 95%", // #F2F2F2
+          "--accent": "249 60% 63%", // #7765DA
+          "--accent-foreground": "0 0% 100%", // White for contrast
+          "--destructive": "0 84.2% 60.2%", // Keep default destructive
+          "--destructive-foreground": "210 40% 98%",
+          "--border": "0 0% 43%", // #6E6E6E
+          "--input": "0 0% 43%", // #6E6E6E
+          "--ring": "260 88% 43%", // #4F0DCE
+          "--radius": "0.5rem",
+          "--sidebar-background": "0 0% 98%",
+          "--sidebar-foreground": "240 5.3% 26.1%",
+          "--sidebar-primary": "240 5.9% 10%",
+          "--sidebar-primary-foreground": "0 0% 98%",
+          "--sidebar-accent": "240 4.8% 95.9%",
+          "--sidebar-accent-foreground": "240 5.9% 10%",
+          "--sidebar-border": "220 13% 91%",
+          "--sidebar-ring": "217.2 91.2% 59.8%",
+        },
+        ".dark": {
+          "--background": "0 0% 22%", // #373737
+          "--foreground": "0 0% 95%", // #F2F2F2
+          "--card": "0 0% 22%", // #373737
+          "--card-foreground": "0 0% 95%", // #F2F2F2
+          "--popover": "0 0% 22%", // #373737
+          "--popover-foreground": "0 0% 95%", // #F2F2F2
+          "--primary": "260 88% 43%", // #4F0DCE
+          "--primary-foreground": "0 0% 100%",
+          "--secondary": "232 56% 58%", // #5767D0
+          "--secondary-foreground": "0 0% 100%",
+          "--muted": "0 0% 43%", // #6E6E6E
+          "--muted-foreground": "0 0% 95%",
+          "--accent": "249 60% 63%", // #7765DA
+          "--accent-foreground": "0 0% 100%",
+          "--destructive": "0 62.8% 30.6%",
+          "--destructive-foreground": "210 40% 98%",
+          "--border": "0 0% 43%", // #6E6E6E
+          "--input": "0 0% 43%", // #6E6E6E
+          "--ring": "260 88% 43%", // #4F0DCE
+          "--sidebar-background": "240 5.9% 10%",
+          "--sidebar-foreground": "240 4.8% 95.9%",
+          "--sidebar-primary": "224.3 76.3% 48%",
+          "--sidebar-primary-foreground": "0 0% 100%",
+          "--sidebar-accent": "240 3.7% 15.9%",
+          "--sidebar-accent-foreground": "240 4.8% 95.9%",
+          "--sidebar-border": "240 3.7% 15.9%",
+          "--sidebar-ring": "217.2 91.2% 59.8%",
+        },
+      });
+    }),
+  ],
 } satisfies Config;

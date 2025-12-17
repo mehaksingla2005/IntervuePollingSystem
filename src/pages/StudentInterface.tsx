@@ -1,3 +1,5 @@
+import { socket } from "@/lib/socket";
+
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
@@ -20,6 +22,16 @@ export default function StudentInterface() {
 
   const currentPoll = state.currentPoll;
   const hasActivePoll = currentPoll && currentPoll.isActive;
+
+
+  useEffect(() => {
+  socket.emit("join", { role: "student" });
+
+  return () => {
+    socket.disconnect();
+  };
+}, []);
+
 
   // Auto-refresh state every 2 seconds to sync with teacher actions
   useEffect(() => {
