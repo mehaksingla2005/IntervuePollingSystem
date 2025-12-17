@@ -5,6 +5,8 @@ export interface Poll {
   createdAt: number;
   expiresAt: number;
   isActive: boolean;
+  duration: number;
+  correctOptionIndex?: number;
 }
 
 export interface Answer {

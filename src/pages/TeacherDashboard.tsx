@@ -1,6 +1,5 @@
-import { socket } from "@/lib/socket";
-
 import React, { useState, useEffect } from "react";
+import { socket } from "@/lib/socket";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -19,6 +18,7 @@ import {
 } from "@/components/ui/alert-dialog";
 import { PollCreator } from "@/components/poll/PollCreator";
 import { PollResults } from "@/components/poll/PollResults";
+import { PollHistoryList } from "@/components/poll/PollHistoryList";
 import { Timer } from "@/components/poll/Timer";
 import { ChatPopup } from "@/components/poll/ChatPopup";
 import { usePoll } from "@/context/PollContext";
@@ -38,16 +38,13 @@ export default function TeacherDashboard() {
   const currentPoll = state.currentPoll;
   const hasActivePoll = currentPoll && currentPoll.isActive;
   const activeStudents = state.students.filter((s) => !s.isKicked);
-
-
   useEffect(() => {
-  socket.emit("join", { role: "teacher" });
+    socket.emit("join", { role: "teacher" });
 
-  return () => {
-    socket.disconnect();
-  };
-}, []);
-
+    return () => {
+      socket.disconnect();
+    };
+  }, []);
   // Auto-refresh state every 3 seconds to see new students and responses
   useEffect(() => {
     const interval = setInterval(() => {
@@ -150,72 +147,7 @@ export default function TeacherDashboard() {
           </TabsContent>
 
           <TabsContent value="history" className="mt-8">
-            <Card>
-              <CardHeader>
-                <CardTitle>Poll History</CardTitle>
-              </CardHeader>
-              <CardContent>
-                {state.polls.length === 0 ? (
-                  <p className="text-center text-gray-600 py-8">
-                    No polls created yet. Create your first poll to see history
-                    here.
-                  </p>
-                ) : (
-                  <div className="space-y-4">
-                    {state.polls
-                      .slice()
-                      .reverse()
-                      .map((poll, index) => {
-                        const pollAnswers = state.answers.filter(
-                          (a) => a.pollId === poll.id,
-                        );
-                        const votes = new Array(poll.options.length).fill(0);
-                        pollAnswers.forEach((answer) => {
-                          votes[answer.optionIndex]++;
-                        });
-
-                        return (
-                          <div
-                            key={poll.id}
-                            className="p-4 border rounded-lg space-y-2"
-                          >
-                            <div className="flex items-center justify-between">
-                              <h3 className="font-medium">{poll.question}</h3>
-                              <Badge
-                                variant={
-                                  poll.isActive ? "default" : "secondary"
-                                }
-                              >
-                                {poll.isActive ? "Active" : "Completed"}
-                              </Badge>
-                            </div>
-                            <div className="text-sm text-gray-600">
-                              Created:{" "}
-                              {new Date(poll.createdAt).toLocaleString()}
-                            </div>
-                            <div className="text-sm text-gray-600">
-                              Total Responses: {pollAnswers.length}
-                            </div>
-                            <div className="grid grid-cols-1 md:grid-cols-2 gap-2 text-sm">
-                              {poll.options.map((option, optIndex) => (
-                                <div
-                                  key={optIndex}
-                                  className="flex justify-between p-2 bg-gray-50 rounded"
-                                >
-                                  <span>{option}</span>
-                                  <span className="font-medium">
-                                    {votes[optIndex]} votes
-                                  </span>
-                                </div>
-                              ))}
-                            </div>
-                          </div>
-                        );
-                      })}
-                  </div>
-                )}
-              </CardContent>
-            </Card>
+            <PollHistoryList />
           </TabsContent>
         </Tabs>
 

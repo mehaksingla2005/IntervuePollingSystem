@@ -16,7 +16,12 @@ import {
 
 interface PollContextType {
   state: PollState;
-  createPoll: (question: string, options: string[]) => void;
+  createPoll: (
+    question: string,
+    options: string[],
+    duration?: number,
+    correctOptionIndex?: number,
+  ) => void;
   submitAnswer: (
     studentId: string,
     studentName: string,
@@ -174,9 +179,9 @@ function pollReducer(state: PollState, action: PollAction): PollState {
               : [],
             students: Array.isArray(parsedState.students)
               ? parsedState.students.map((student: any) => ({
-                  ...student,
-                  isKicked: student.isKicked || false,
-                }))
+                ...student,
+                isKicked: student.isKicked || false,
+              }))
               : [],
           };
         } catch (error) {
@@ -214,9 +219,9 @@ export function PollProvider({ children }: { children: ReactNode }) {
           // Ensure students have isKicked property
           students: Array.isArray(parsedState.students)
             ? parsedState.students.map((student: any) => ({
-                ...student,
-                isKicked: student.isKicked || false,
-              }))
+              ...student,
+              isKicked: student.isKicked || false,
+            }))
             : [],
         };
         dispatch({ type: "LOAD_STATE", payload: completeState });
@@ -291,14 +296,21 @@ export function PollProvider({ children }: { children: ReactNode }) {
     }
   }, [state.currentPoll, state.answers]);
 
-  const createPoll = (question: string, options: string[]) => {
+  const createPoll = (
+    question: string,
+    options: string[],
+    duration: number = 60,
+    correctOptionIndex?: number,
+  ) => {
     const poll: Poll = {
       id: Date.now().toString(),
       question,
       options,
       createdAt: Date.now(),
-      expiresAt: Date.now() + 60000, // 60 seconds
+      expiresAt: Date.now() + duration * 1000,
       isActive: true,
+      duration,
+      correctOptionIndex,
     };
     dispatch({ type: "CREATE_POLL", payload: poll });
   };
