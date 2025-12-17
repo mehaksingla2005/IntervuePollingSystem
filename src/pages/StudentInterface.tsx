@@ -247,6 +247,7 @@ export default function StudentInterface() {
             <PollQuestion
               studentId={studentId}
               studentName={studentName}
+              questionNumber={state.polls.length}
               onAnswerSubmitted={handleAnswerSubmitted}
             />
           </div>

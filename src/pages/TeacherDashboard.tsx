@@ -29,6 +29,7 @@ import {
   Clock,
   UserX,
   History,
+  Eye
 } from "lucide-react";
 
 export default function TeacherDashboard() {
@@ -86,6 +87,13 @@ export default function TeacherDashboard() {
                   Poll Active
                 </Badge>
               )}
+              <Button
+                className="bg-[#6B46C1] hover:bg-[#553C9A] text-white rounded-full ml-4 font-medium"
+                onClick={() => setActiveTab("history")}
+              >
+                <Eye className="h-4 w-4 mr-2" />
+                View Poll history
+              </Button>
             </div>
           </div>
         </div>
@@ -123,7 +131,7 @@ export default function TeacherDashboard() {
         )}
 
         <Tabs value={activeTab} onValueChange={setActiveTab}>
-          <TabsList className="grid w-full grid-cols-3 max-w-lg mx-auto">
+          <TabsList className="grid w-full grid-cols-3 max-w-lg mx-auto mb-8">
             <TabsTrigger value="create" className="flex items-center gap-2">
               <BarChart3 className="h-4 w-4" />
               Create Poll
@@ -138,20 +146,28 @@ export default function TeacherDashboard() {
             </TabsTrigger>
           </TabsList>
 
-          <TabsContent value="create" className="mt-8">
+          <TabsContent value="create">
             <PollCreator />
           </TabsContent>
 
-          <TabsContent value="results" className="mt-8">
-            <PollResults />
+          <TabsContent value="results">
+            <div className="space-y-8 flex flex-col items-center">
+              <PollResults />
+              <Button
+                className="w-full max-w-sm mx-auto bg-[#5b5bd6] hover:bg-[#4a4ac2] text-white rounded-full py-6 text-lg"
+                onClick={() => setActiveTab("create")}
+              >
+                + Ask a new question
+              </Button>
+            </div>
           </TabsContent>
 
-          <TabsContent value="history" className="mt-8">
+          <TabsContent value="history">
             <PollHistoryList />
           </TabsContent>
         </Tabs>
 
-        {activeStudents.length > 0 && (
+        {activeStudents.length > 0 && activeTab !== "results" && (
           <Card className="mt-8">
             <CardHeader>
               <CardTitle>Active Students</CardTitle>

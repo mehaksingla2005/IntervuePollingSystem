@@ -41,7 +41,7 @@ export function PollHistoryList() {
                                 Question {polls.length - index}
                             </h2>
 
-                            <div className="bg-[#5b5bd6] bg-opacity-80 text-white p-4 rounded-t-lg shadow-sm">
+                            <div className="bg-[#373737] bg-opacity-80 text-white p-4 rounded-t-lg shadow-sm">
                                 <p className="font-medium text-lg">{poll.question}</p>
                                 {poll.duration && (
                                     <div className="text-xs opacity-80 mt-1">
@@ -65,36 +65,8 @@ export function PollHistoryList() {
                                             {/* Progress Bar Background */}
                                             <div
                                                 className="absolute top-0 left-0 h-full bg-[#5b5bd6] transition-all duration-1000 ease-out"
-                                                style={{ width: `${percentage}%`, opacity: 0.15 }} // 15% opacity to make text readable? Or closer to design?
-                                            // Design has solid blue but maybe text is white if 100%? 
-                                            // Actually looking at "Mars 75%", the bar is solid blue. The text "Mars" is white?
-                                            // "Venus 5%" bar is small. Text "Venus" is black?
-                                            // This implies the text color changes based on background... tricky.
-                                            // Let's stick to a simpler approach: Bar underneath, semi-transparent or light color, or use mix-blend-mode?
-                                            // Wait, "Mars" text is clearly white on the blue bar. "Venus" text is black on white bg.
-                                            // Implementation:
-                                            // Layer 1: Background (white/grey)
-                                            // Layer 2: Bar (Blue) with width %. z-index 0.
-                                            // Layer 3: Text content. z-index 1. 
-                                            // But for text color contrast, we usually duplicate the text or use mix-blend-mode: difference (ugly).
-                                            // Simplest: Just use a light bar color or semi-transparent so black text works always.
-                                            // EXCEPT design clearly shows white text on blue.
-
-                                            // Let's try to match it: 
-                                            // If percentage > x, maybe we can assume it covers the text... 
-                                            // Let's us a semi-transparent blue that is dark enough to look like the design but light enough for black text?
-                                            // Or just use the design color #5b5bd6 which is quite dark.
-
-                                            // Let's go with the semi-transparent approach for now to be safe, or just a separate progress bar underneath?
-                                            // No, design is "filled row".
-
-                                            // I'll use a `z-0` div for the bar. `z-10` relative div for content.
-                                            // The bar will be opacity 100 but maybe a lighter shade?
-                                            // Looking at "Venus", the bar is barely there.
-                                            // Looking at "Saturn 15%", bar covers "4 Satu".
-                                            // Actually, let's just make the text standard black/gray. The Blue bar can be behind.
+                                                style={{ width: `${percentage}%`, opacity: 0.15 }}
                                             />
-                       
                                             <div
                                                 className="absolute top-0 left-0 h-full bg-[#5b5bd6] transition-all duration-1000 ease-out"
                                                 style={{ width: `${percentage}%` }}
