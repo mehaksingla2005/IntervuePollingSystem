@@ -78,7 +78,12 @@ npm run dev
 <img width="1205" height="786" alt="Screenshot 2025-12-17 at 8 05 14 PM" src="https://github.com/user-attachments/assets/aeffc231-e327-478b-bc68-983c8bb3d8f1" />
 <img width="1470" height="956" alt="Screenshot 2025-12-17 at 8 12 03 PM" src="https://github.com/user-attachments/assets/1dd806fa-2bcf-473d-8a37-9af67ba22821" />
 
+<img width="1102" height="589" alt="Screenshot 2025-12-17 at 10 35 45 PM" src="https://github.com/user-attachments/assets/446ea73a-2a79-4e59-8564-c7af49aeaf5e" />
+<img width="1467" height="809" alt="Screenshot 2025-12-17 at 10 36 31 PM" src="https://github.com/user-attachments/assets/c4e92bba-de8e-4177-b14e-8c47a84de8a9" />
+<img width="766" height="519" alt="Screenshot 2025-12-17 at 10 37 40 PM" src="https://github.com/user-attachments/assets/49970b09-b1a3-4b94-8360-680c90a5bf9c" />
 
+<img width="710" height="387" alt="Screenshot 2025-12-17 at 10 37 54 PM" src="https://github.com/user-attachments/assets/6378302c-b56a-48ad-ba45-d4626fc11094" />
+<img width="1470" height="956" alt="Screenshot 2025-12-17 at 10 38 58 PM" src="https://github.com/user-attachments/assets/41cfeb17-0128-47f3-86ac-b808e3f89811" />
 
 
 ![Screenshot (81)](https://github.com/user-attachments/assets/f6f4e450-7a6c-42ef-9e68-da7c2145d5d1)
