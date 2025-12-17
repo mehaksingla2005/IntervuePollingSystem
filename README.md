@@ -17,8 +17,8 @@ Follow these steps to run the project on your local machine:
 ### 1. Clone the repository and start the app
 
 ```bash
-git clone https://github.com/adarshjha7/Live-Polling-System.git
-cd Live-Polling-System
+git clone https://github.com/mehaksingla2005/IntervuePollingSystem.git
+cd IntervuePollingSystem
 npm install
 npm run dev
 ```
